@@ -1,9 +1,10 @@
+// Jenkinsfile
 pipeline {
     agent any
     stages {
         stage('Clone') {
             steps {
-                sh branch: 'main', url: 'https://github.com/zawawee37/web-simple.git'
+                sh 'https://github.com/zawawee37/web-simple.git'
             }
         }
         stage('Build Docker Image') {
@@ -14,7 +15,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 sh 'docker rm -f my-web || true'
-                sh 'docker run -d --name my-web -p 8085:80 my-web-cicd'
+                sh 'docker run -d --name my-web -p 8080:80 my-web-cicd'
             }
         }
     }
