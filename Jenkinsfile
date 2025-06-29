@@ -1,6 +1,4 @@
-groovy
-CopyEdit
-// Jenkinsfile
+
 pipeline {
     agent any
     stages {
