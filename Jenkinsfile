@@ -4,18 +4,18 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                bat 'https://github.com/zawawee37/web-simple.git'
+                git clone 'https://github.com/zawawee37/web-simple.git'
             }
         }
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t my-web-cicd .'
+                bash 'docker build -t my-web-cicd .'
             }
         }
         stage('Run Container') {
             steps {
-                bat 'docker rm -f my-web || true'
-                bat 'docker run -d --name my-web -p 8080:80 my-web-cicd'
+                bash 'docker rm -f my-web || true'
+                bash 'docker run -d --name my-web -p 8080:80 my-web-cicd'
             }
         }
     }
