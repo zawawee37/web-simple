@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                sh 'https://github.com/zawawee37/web-simple.git'
+                git clone 'https://github.com/zawawee37/web-simple.git'
             }
         }
         stage('Build Docker Image') {
