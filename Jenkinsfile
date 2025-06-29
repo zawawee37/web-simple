@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'docker:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // แชร์ Docker socket จาก host
+        }
+    }
     stages {
         stage('Clone') {
             steps {
@@ -13,7 +18,7 @@ pipeline {
         }
         stage('Run Container') {
             steps {
-                sh 'docker rm -f my-web || exit 0'
+                sh 'docker rm -f my-web || true'
                 sh 'docker run -d --name my-web -p 5000:80 my-web-cicd'
             }
         }
