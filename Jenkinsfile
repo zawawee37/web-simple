@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Check Docker') {
-            steps {
-                sh 'which docker || echo "Docker command not found!"'
-                sh 'docker version || echo "Docker not available!"'
-            }
-        }
         stage('Clone') {
             steps {
                 git 'https://github.com/zawawee37/web-simple.git'
