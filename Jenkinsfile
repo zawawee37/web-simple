@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:24.0.5-cli'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
     stages {
         stage('Clone') {
             steps {
@@ -13,13 +8,13 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t my-web-cicd .'
+                bat 'docker build -t my-web-cicd .'
             }
         }
         stage('Run Container') {
             steps {
-                sh 'docker rm -f my-web || true'
-                sh 'docker run -d --name my-web -p 5000:80 my-web-cicd'
+                bat 'docker rm -f my-web || exit 0'
+                bat 'docker run -d --name my-web -p 5000:80 my-web-cicd'
             }
         }
     }
