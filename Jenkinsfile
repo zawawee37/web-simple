@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/zawawee37/web-simple.git'
-            }
+    git branch: 'main', url: 'https://github.com/zawawee37/web-simple.git'
+  }
         }
         stage('Build Docker Image') {
             steps {
@@ -13,8 +13,8 @@ pipeline {
         }
         stage('Run Container') {
             steps {
-                bat 'docker rm -f my-web || exit 0'
-                bat 'docker run -d --name my-web -p 5000:80 my-web-cicd'
+                bat 'docker rm -f my-web || true'
+                bat 'docker run -d --name my-web -p 8888:80 my-web-cicd'
             }
         }
     }
